@@ -29,3 +29,30 @@
   More info about color theming using Ionic:
   https://ionicframework.com/docs/theming/color-generator
 */
+
+.ion-color-primary {
+  --ion-color-base: var(--ion-color-primary, #B83D3D) !important;
+  --ion-color-base-rgb: var(--ion-color-primary-rgb, 184, 61, 61) !important;
+  --ion-color-contrast: var(--ion-color-primary-contrast, #ffffff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-primary-contrast-rgb, 255, 255, 255) !important;
+  --ion-color-shade: var(--ion-color-primary-shade, #a23636) !important;
+  --ion-color-tint: var(--ion-color-primary-tint, #bf5050) !important;
+}
+
+.ion-color-secondary {
+  --ion-color-base: var(--ion-color-secondary, #66CC99) !important;
+  --ion-color-base-rgb: var(--ion-color-secondary-rgb, 102, 204, 153) !important;
+  --ion-color-contrast: var(--ion-color-secondary-contrast, #00000) !important;
+  --ion-color-contrast-rgb: var(--ion-color-secondary-contrast-rgb, 0, 0, 0) !important;
+  --ion-color-shade: var(--ion-color-secondary-shade, #5AB487) !important;
+  --ion-color-tint: var(--ion-color-secondary-tint, #75d1A3) !important;
+}
+
+.ion-color-tertiary {
+  --ion-color-base: var(--ion-color-tertiary, #66CCCC) !important;
+  --ion-color-base-rgb: var(--ion-color-tertiary-rgb, 102, 204, 204) !important;
+  --ion-color-contrast: var(--ion-color-tertiary-contrast, #000000) !important;
+  --ion-color-contrast-rgb: var(--ion-color-tertiary-contrast-rgb, 0, 0, 0) !important;
+  --ion-color-shade: var(--ion-color-tertiary-shade, #5ab4b4) !important;
+  --ion-color-tint: var(--ion-color-tertiary-tint, #75d1d1) !important;
+}
