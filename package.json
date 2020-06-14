@@ -1,0 +1,28 @@
+{
+  "name": "tomato-frontend",
+  "private": true,
+  "version": "0.0.1",
+  "description": "tomato-frontend",
+  "license": "MIT",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "build-capacitor": "stencil build && npx cap sync", 
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watch",
+    "generate": "stencil generate"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "2.2.0",
+    "@ionic/core": "^5.0.7",
+    "@stencil/core": "1.14.0"
+  },
+  "dependencies": {
+    "@capacitor/android": "^2.2.0",
+    "@capacitor/core": "2.2.0",
+    "@capacitor/ios": "^2.2.0"
+  }
+}

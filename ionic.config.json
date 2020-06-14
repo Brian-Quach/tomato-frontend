@@ -1,0 +1,7 @@
+{
+  "name": "tomato",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}
