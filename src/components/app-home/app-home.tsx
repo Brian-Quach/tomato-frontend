@@ -1,10 +1,12 @@
 import { Component, h } from '@stencil/core';
-
 @Component({
   tag: 'app-home',
   styleUrl: 'app-home.scss'
 })
 export class AppHome {
+
+  componentDidLoad() {
+  }
 
   render() {
     return [
@@ -13,10 +15,13 @@ export class AppHome {
           <ion-title>Tomato</ion-title>
         </ion-toolbar>
       </ion-header>,
-
       <ion-content class="ion-padding">
-        Hello! :)
+        <pomodoro-timer>
+        </pomodoro-timer>
       </ion-content>
     ];
+  }
+
+  componentDidRender() {
   }
 }

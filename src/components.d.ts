@@ -14,6 +14,7 @@ export namespace Components {
     interface AppRoot {
     }
     interface PomodoroTimer {
+        "duration": number;
     }
 }
 declare global {
@@ -57,6 +58,7 @@ declare namespace LocalJSX {
     interface AppRoot {
     }
     interface PomodoroTimer {
+        "duration"?: number;
     }
     interface IntrinsicElements {
         "app-home": AppHome;
