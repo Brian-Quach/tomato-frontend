@@ -2,6 +2,7 @@ import { ApiClient } from "./api-client";
 import { API } from '../global/environment';
 import { TimerState } from "../models/timer-state";
 import { TimerStatus } from "../models/timer-status";
+import { PomodoroState, PomodoroMinutes } from "../models/pomodoro-state";
 
 export class Timer{
 
@@ -11,6 +12,7 @@ export class Timer{
     private duration: number;
     private timeOffset: number;
     private timeLeft: number;
+    private pomodoroState: PomodoroState;
 
     public static get Instance() {
         return this._instance || (this._instance = new this());
@@ -18,8 +20,8 @@ export class Timer{
 
     private constructor() {
         this.state = TimerState.STOP;
-        this.duration = -1;
-        this.timeLeft = 0;
+        this.pomodoroState = PomodoroState.POMODORO;
+        this.setTimerDuration(PomodoroMinutes.POMODORO);
     }
 
     async getTime() {
@@ -47,7 +49,8 @@ export class Timer{
     private timerStatus() {
         return {
             state: this.state,
-            remaining: this.timeLeft
+            remaining: this.timeLeft,
+            inteval: this.pomodoroState
         } as TimerStatus;
     }
 
