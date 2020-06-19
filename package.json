@@ -18,7 +18,8 @@
   "devDependencies": {
     "@capacitor/cli": "2.2.0",
     "@ionic/core": "^5.0.7",
-    "@stencil/core": "1.14.0"
+    "@stencil/core": "1.14.0",
+    "prettier": "2.0.5"
   },
   "dependencies": {
     "@capacitor/android": "^2.2.0",

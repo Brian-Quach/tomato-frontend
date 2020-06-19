@@ -13,6 +13,8 @@ export class Timer{
     private timeOffset: number;
     private timeLeft: number;
     private pomodoroState: PomodoroState;
+    private task: string;
+    private intervalNumber: number = 0;
 
     public static get Instance() {
         return this._instance || (this._instance = new this());
@@ -46,6 +48,14 @@ export class Timer{
         return (this.timerEnd ? this.timerEnd : -1);
     }
 
+    setTask(task: string) {
+        this.task = task;
+    }
+
+    getTask(){
+        return this.task;
+    }
+
     private timerStatus() {
         return {
             state: this.state,
@@ -73,7 +83,35 @@ export class Timer{
         let currentTime = await this.getTime();
         this.timeLeft = this.timerEnd - currentTime;
 
+        if(this.timeLeft <= 0) {
+            this.state = TimerState.STOP;
+            this.timeLeft = 0;
+
+            if(this.pomodoroState == PomodoroState.POMODORO) {
+                this.intervalNumber += 1;
+                this.pomodoroState = (this.intervalNumber % 4 == 0) ? PomodoroState.BREAK_LONG : PomodoroState.BREAK_SHORT;
+                this.setTimerDuration((this.intervalNumber % 4 == 0) ? PomodoroMinutes.BREAK_LONG : PomodoroMinutes.BREAK_SHORT);
+            } else {
+                this.pomodoroState = PomodoroState.POMODORO;
+                this.setTimerDuration(PomodoroMinutes.POMODORO);
+            }
+        }
+
         return this.timerStatus();
+    }
+
+    async skip() {
+        this.state = TimerState.STOP;
+        this.timeLeft = 0;
+
+        if(this.pomodoroState == PomodoroState.POMODORO) {
+            this.intervalNumber += 1;
+            this.pomodoroState = (this.intervalNumber % 4 == 0) ? PomodoroState.BREAK_LONG : PomodoroState.BREAK_SHORT;
+            this.setTimerDuration((this.intervalNumber % 4 == 0) ? PomodoroMinutes.BREAK_LONG : PomodoroMinutes.BREAK_SHORT);
+        } else {
+            this.pomodoroState = PomodoroState.POMODORO;
+            this.setTimerDuration(PomodoroMinutes.POMODORO);
+        }
     }
 
     async pauseTimer() {
@@ -103,7 +141,7 @@ export class Timer{
     async stopTimer() {
         if(this.state == TimerState.STOP) return;
 
-        this.timeLeft = -1;
+        this.setTimerDuration(PomodoroMinutes.POMODORO);
         this.timerEnd = -1;
         this.state = TimerState.STOP;
 

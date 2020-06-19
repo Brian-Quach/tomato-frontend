@@ -18,7 +18,6 @@ export class AppHome {
       <ion-content class="ion-padding">
         <pomodoro-timer>
         </pomodoro-timer>
-
         {/* <pomodoro-todo>
         </pomodoro-todo> */}
       </ion-content>

@@ -14,10 +14,27 @@
         font-size: 64px;
     }
 
-    #timer-button {
-        width: 50%;
-        margin: 16px 0 0 0;
-    }
+    #timer-control {
+      display: flex;
+
+        .reset-button {
+            width: 25%;
+            height: 46px;
+            margin: 16px 0 0 0;
+
+            img{
+                height: 70%;
+                margin: 15%;
+                fill: white;
+            }
+        }
+
+        #timer-button {
+            width: 50%;
+            height: 46px;
+            margin: 16px 0 0 0;
+        }
     
+    }
 
 } 

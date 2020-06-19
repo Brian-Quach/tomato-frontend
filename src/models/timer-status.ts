@@ -5,4 +5,5 @@ export class TimerStatus {
     state: TimerState;
     remaining: number;
     inteval: PomodoroState;
+    task: string;
 }
