@@ -1,6 +1,6 @@
 import { Component, Prop, State, h } from '@stencil/core';
 import { Event, EventEmitter } from '@stencil/core';
-import { Todo } from '../../../models/todo-list';
+import { Todo } from '../../../models/todo';
 
 @Component({
   tag: 'todo-item',
@@ -25,7 +25,7 @@ export class TodoItem {
     if (!this.isEditable) {
 
       todoTemplate = <div>
-        {this.todo.title}
+        {this.todo.name}
         <button onClick = {this.removeThisTodo}>
           X
         </button>
@@ -34,7 +34,7 @@ export class TodoItem {
     } else {
 
       todoTemplate = <div>
-        <input value={this.todo.title} onKeyDown={this.handleKeyDown} />
+        <input value={this.todo.name} onKeyDown={this.handleKeyDown} />
 
       </div>
     }

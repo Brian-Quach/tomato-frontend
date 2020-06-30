@@ -18,22 +18,12 @@ export class AppHome {
       <ion-content class="ion-padding">
         <pomodoro-timer>
         </pomodoro-timer>
-        {/* <pomodoro-todo>
-        </pomodoro-todo> */}
+        <pomodoro-todo>
+        </pomodoro-todo>
       </ion-content>
     ];
   }
 
   componentDidRender() {
-    // Timer.Instance.checkTimer().then((timer) => {
-    //   console.log(timer);
-    // });
-    // Timer.Instance.setTimerDuration(1);
-    // Timer.Instance.startTimer();
-    // setInterval((_) => { 
-    //   Timer.Instance.checkTimer().then((timer) => {
-    //     console.log(timer.remaining)
-    //   })
-    // }, 100);
   }
 }
