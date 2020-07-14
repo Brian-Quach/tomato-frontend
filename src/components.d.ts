@@ -83,8 +83,6 @@ declare namespace LocalJSX {
     interface PomodoroTodo {
     }
     interface TodoItem {
-        "onRemoveTodo"?: (event: CustomEvent<any>) => void;
-        "onUpdateTodo"?: (event: CustomEvent<any>) => void;
         "todo"?: Todo;
     }
     interface IntrinsicElements {

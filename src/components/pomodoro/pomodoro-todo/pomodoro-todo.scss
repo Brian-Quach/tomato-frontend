@@ -19,16 +19,69 @@
     .list-wrapper {
         padding-top: 10px;
 
-        .list-item{
-            border-radius: 5px;
-            padding: 16px;
+        .list-items{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .new-item-form {
             background: white;
+            margin: 0.5em 0;
+            padding: 10px 5px;
+            border-radius: 10px;
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+            color: black;
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-weight: bold;
+                font-size: 18px;
+            }
+
+            input {
+                font-size: 14px;
+                line-height: 16px;
+            }
+
+            .form-footer {
+                margin-top: 1em;
+                display: flex;
+                flex-direction: row-reverse;
+
+            }
+            
+        }
+
+        .button-wrapper {
+            height: 50px;
+            margin: 0.5em 0;
+            padding: 3px 5px;
+            border-radius: 10px;
+            border: #a8302c dashed 3px;
 
             display: flex;
-            flex-direction: row;
+            align-content: center;
+            align-items: center;
 
-            
+            .text-wrapper {
+                margin: auto;
+                align-self: center;
+                display: flex;
+
+                .add-icon {
+                    display: flex;
+
+                    svg {
+                        fill: white;
+                    }
+                }
+
+                p {
+                    margin: auto;
+                }
+                
+            }
         }
     }
 }

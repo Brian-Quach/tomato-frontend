@@ -15,6 +15,10 @@ export class TodoManager{
         this.todoList = new TodoList();
     }
 
+    getList(): TodoList {
+        return this.todoList;
+    }
+
     markComplete(id?: number) {
         if(!id && !this.currentItem) return;
         if(id != null) {
@@ -57,6 +61,7 @@ export class TodoManager{
 
     addItem(itemName: string, pomodoros: number = 0){
         this.todoList.addTodoItem(itemName, pomodoros);
+        return this.getList()
     }
 
     getAllItems(): Todo[] {

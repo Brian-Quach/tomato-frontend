@@ -1,5 +1,4 @@
 import { Component, Prop, State, h } from '@stencil/core';
-import { Event, EventEmitter } from '@stencil/core';
 import { Todo } from '../../../models/todo';
 
 @Component({
@@ -7,57 +6,45 @@ import { Todo } from '../../../models/todo';
   styleUrl: 'todo-item.scss'
 })
 export class TodoItem {
+  @Prop() todo: Todo = {
+    id: 1,
+    name: "Do a task X",
+    completed: false,
+    pomodorosUsed: 1,
+    pomodorosAllocated: 4
+  };
+  @State() isActive = false;
+  @State() isComplete = false;
 
-  @Event() removeTodo: EventEmitter;
-  @Event() updateTodo: EventEmitter;
-
-  @Prop() todo: Todo;
-
-  @State() isEditable = false;
-
-  toggleEdition() {
-      this.isEditable = !this.isEditable;
+  componentDidLoad() {
+    this.isComplete = this.todo.completed;
   }
 
   render() {
-    let todoTemplate;
-
-    if (!this.isEditable) {
-
-      todoTemplate = <div>
-        {this.todo.name}
-        <button onClick = {this.removeThisTodo}>
-          X
-        </button>
-      </div>
-
-    } else {
-
-      todoTemplate = <div>
-        <input value={this.todo.name} onKeyDown={this.handleKeyDown} />
-
-      </div>
-    }
-
     return (
-      <li onDblClick= {this.toggleEdition}>
-        {todoTemplate}
-      </li>
+      <div class={"item-wrapper" + (this.isActive ? " active" : "")}>
+        <div class="checkbox">
+          <img onClick={(_) => this.toggleComplete()} src={this.isComplete ? "/assets/images/checked.svg" :"/assets/images/unchecked.svg"}></img>
+        </div>
+
+        <p class="task-label">
+          {this.todo.name}
+        </p>
+
+        <p class="pomodoro-progress">
+          {this.todo.pomodorosUsed + '/' + this.todo.pomodorosAllocated}
+        </p>
+
+        <div class="edit">
+          <img src="/assets/images/edit.svg"></img>
+        </div>
+
+      </div>
     );
   }
 
-  handleKeyDown(e){
-    if (e.code === "Enter") {
-      this.updateThisTodo(e.target.value);
-      this.isEditable = false;
-    }
-  };
-
-  removeThisTodo = () => {
-    this.removeTodo.emit(this.todo.id);
-  }
-
-  updateThisTodo(value) {
-    this.updateTodo.emit({value: value, id: this.todo.id});
+  async toggleComplete() {
+    this.todo.completed = !this.todo.completed;
+    this.isComplete = this.todo.completed;
   }
 }
