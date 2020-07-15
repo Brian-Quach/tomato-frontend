@@ -1,4 +1,3 @@
-
 export class Todo implements ITodo{
     public id: number;
     public name: string;

@@ -2,6 +2,7 @@ import { Component, h, Prop, State } from '@stencil/core';
 import { Timer } from '../../../helpers/timer';
 import { TimerState } from '../../../models/timer-state';
 import { PomodoroState } from '../../../models/pomodoro-state';
+import { Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'pomodoro-timer',
@@ -16,6 +17,11 @@ export class PomodoroTimer {
     pomodoroState: PomodoroState;
     pomodoroCount: number = 0;
     timerWatch: any;    
+    @Event() timerCompleted: EventEmitter<PomodoroState>;
+  
+    timerCompletedHandler() {
+      this.timerCompleted.emit(this.pomodoroState);
+    }
 
     componentWillLoad() {
         this.pomodoroTask = "Let's get this bread!";

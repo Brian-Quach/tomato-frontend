@@ -1,5 +1,6 @@
 import { Component, Prop, State, h } from '@stencil/core';
 import { Todo } from '../../../models/todo';
+import { Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'todo-item',
@@ -15,6 +16,11 @@ export class TodoItem {
   };
   @State() isActive = false;
   @State() isComplete = false;
+  @Event() todoCompleted: EventEmitter<Todo>;
+
+  todoCompletedHandler() {
+    this.todoCompleted.emit(this.todo);
+  }
 
   componentDidLoad() {
     this.isComplete = this.todo.completed;

@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { PomodoroState } from "./models/pomodoro-state";
 import { Todo } from "./models/todo";
 export namespace Components {
     interface AppHome {
@@ -79,10 +80,12 @@ declare namespace LocalJSX {
     }
     interface PomodoroTimer {
         "duration"?: number;
+        "onTimerCompleted"?: (event: CustomEvent<PomodoroState>) => void;
     }
     interface PomodoroTodo {
     }
     interface TodoItem {
+        "onTodoCompleted"?: (event: CustomEvent<Todo>) => void;
         "todo"?: Todo;
     }
     interface IntrinsicElements {
