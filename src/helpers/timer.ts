@@ -56,11 +56,11 @@ export class Timer{
         return this.task;
     }
 
-    private timerStatus() {
+    timerStatus() {
         return {
             state: this.state,
             remaining: this.timeLeft,
-            inteval: this.pomodoroState
+            interval: this.pomodoroState
         } as TimerStatus;
     }
 
@@ -84,7 +84,7 @@ export class Timer{
         this.timeLeft = this.timerEnd - currentTime;
 
         if(this.timeLeft <= 0) {
-            this.state = TimerState.STOP;
+            this.state = TimerState.COMPLETE;
             this.timeLeft = 0;
 
             if(this.pomodoroState == PomodoroState.POMODORO) {

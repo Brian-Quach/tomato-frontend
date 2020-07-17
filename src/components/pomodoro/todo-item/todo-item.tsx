@@ -1,4 +1,4 @@
-import { Component, Prop, State, h } from '@stencil/core';
+import { Component, Prop, State, h, Listen } from '@stencil/core';
 import { Todo } from '../../../models/todo';
 import { Event, EventEmitter } from '@stencil/core';
 
@@ -10,16 +10,26 @@ export class TodoItem {
   @Prop() todo: Todo = {
     id: 1,
     name: "Do a task X",
+    isActive: false,
     completed: false,
     pomodorosUsed: 1,
     pomodorosAllocated: 4
   };
   @State() isActive = false;
   @State() isComplete = false;
-  @Event() todoCompleted: EventEmitter<Todo>;
+  @Event() todoChanged: EventEmitter<Todo>;
 
-  todoCompletedHandler() {
-    this.todoCompleted.emit(this.todo);
+  @Listen('todoUpdated', {target: 'document'})
+  todoUpdatedHandler(event: CustomEvent<Todo>) {
+    let updatedTodo = event.detail;
+    console.log(updatedTodo)
+    if(updatedTodo.id == this.todo.id){
+      this.todo = updatedTodo;
+    }
+  }
+
+  async todoChangedHandler() {
+    this.todoChanged.emit(this.todo);
   }
 
   componentDidLoad() {
@@ -28,7 +38,7 @@ export class TodoItem {
 
   render() {
     return (
-      <div class={"item-wrapper" + (this.isActive ? " active" : "")}>
+      <div class={"item-wrapper" + (this.todo.isActive ? " active" : "")}>
         <div class="checkbox">
           <img onClick={(_) => this.toggleComplete()} src={this.isComplete ? "/assets/images/checked.svg" :"/assets/images/unchecked.svg"}></img>
         </div>
@@ -52,5 +62,6 @@ export class TodoItem {
   async toggleComplete() {
     this.todo.completed = !this.todo.completed;
     this.isComplete = this.todo.completed;
+    if(this.isComplete) this.todoChangedHandler()
   }
 }

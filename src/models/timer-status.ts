@@ -4,6 +4,6 @@ import { PomodoroState } from "./pomodoro-state";
 export class TimerStatus {
     state: TimerState;
     remaining: number;
-    inteval: PomodoroState;
+    interval: PomodoroState;
     task: string;
 }

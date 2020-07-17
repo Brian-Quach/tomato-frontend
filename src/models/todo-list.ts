@@ -2,13 +2,14 @@ import { Todo } from "./todo";
 
 export class TodoList {
     public static todos: Todo[] = new Array;
+    private activeItem: Todo;
     
     addTodoItem(name: string, pomodoros: number) {
         let newTodo = new Todo(name, pomodoros);
         TodoList.todos.push(newTodo);
         
         //TODO: Databse?
-        return TodoList.todos;
+        return newTodo;
     }
 
     getAllTodos(): Todo[] {
@@ -43,10 +44,18 @@ export class TodoList {
         return TodoList.todos;
     }
 
+    setActiveItem(todo: Todo){
+        this.activeItem = todo;
+    }
+
+    getActiveItem(){
+        return this.activeItem
+    }
+    
     //temp
     printList(){
         TodoList.todos.forEach((todo, index) =>{
-            console.log(`${index}) ${todo.name}`);
+            console.log(`${index}) ${todo.name} - ${todo.pomodorosUsed}/${todo.pomodorosAllocated}`);
         })
     }
 }

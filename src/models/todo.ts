@@ -1,6 +1,7 @@
 export class Todo implements ITodo{
     public id: number;
     public name: string;
+    public isActive: boolean;
     public completed: boolean;
     public pomodorosUsed: number;
     public pomodorosAllocated: number;
@@ -10,6 +11,7 @@ export class Todo implements ITodo{
         this.pomodorosAllocated = pomodoros;
 
         this.completed = false;
+        this.isActive = false;
         this.pomodorosUsed = 0;
         this.id = new Date().valueOf();
     }

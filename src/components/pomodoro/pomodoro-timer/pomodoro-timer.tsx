@@ -3,6 +3,7 @@ import { Timer } from '../../../helpers/timer';
 import { TimerState } from '../../../models/timer-state';
 import { PomodoroState } from '../../../models/pomodoro-state';
 import { Event, EventEmitter } from '@stencil/core';
+import { TimerStatus } from '../../../models/timer-status';
 
 @Component({
   tag: 'pomodoro-timer',
@@ -17,10 +18,10 @@ export class PomodoroTimer {
     pomodoroState: PomodoroState;
     pomodoroCount: number = 0;
     timerWatch: any;    
-    @Event() timerCompleted: EventEmitter<PomodoroState>;
+    @Event() timerChanged: EventEmitter<TimerStatus>;
   
-    timerCompletedHandler() {
-      this.timerCompleted.emit(this.pomodoroState);
+    async timerChangedHandler() {
+        this.timerChanged.emit(Timer.Instance.timerStatus());
     }
 
     componentWillLoad() {
@@ -31,8 +32,11 @@ export class PomodoroTimer {
         this.timerWatch = window.setInterval((_) => {
             Timer.Instance.checkTimer().then((timer) =>{
                 this.timeString = this.getTimerString(timer.remaining);
-                this.timerState = timer.state;
-                this.pomodoroState = timer.inteval;
+                if(this.timerState != timer.state) {
+                    this.timerState = timer.state;
+                    this.pomodoroState = timer.interval;
+                    this.timerChangedHandler()
+                }
             })
         }, 1000);
     }
@@ -71,6 +75,7 @@ export class PomodoroTimer {
         } else {
             Timer.Instance.pauseTimer();
         }
+        this.timerChangedHandler();
     }
 
     skipOrReset() {
@@ -79,6 +84,7 @@ export class PomodoroTimer {
         } else {
             Timer.Instance.skip();
         }
+        this.timerChangedHandler();
     }
 
     getTimerString(ms: number){
